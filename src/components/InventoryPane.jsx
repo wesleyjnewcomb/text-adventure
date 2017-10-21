@@ -9,7 +9,7 @@ const InventoryPane = props => {
     return (
       <li key={item.name}>
         {item.name}
-        <a onClick={handleClick}>Drop</a>
+        <a onClick={handleClick}>drop</a>
       </li>
     )
   })

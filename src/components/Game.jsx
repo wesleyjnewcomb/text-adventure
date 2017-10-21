@@ -85,7 +85,7 @@ class Game extends React.Component {
           <div id='left-section'>
             <div id='top-section'>
               <h1>{currentRoom.name}</h1>
-              <MessageLog messages={this.state.messages} />
+              <MessageLog message={currentRoom.desc} />
             </div>
             <div id='bottom-section'>
               <RoomItems items={currentRoom.items} getItem={this.getItem} />
