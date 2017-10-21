@@ -10,8 +10,11 @@ class MessageLog extends React.Component {
 
   componentDidMount() {
    const intervalId = window.setInterval(() => {
-      this.setState({ currentPosition: this.state.currentPosition + 1 })	
+	  if (this.state.currentPosition <= this.props.message.length) {
+        this.setState({ currentPosition: this.state.currentPosition + 1 })	
+	  }
 	}, 40)  
+	  
    this.setState({ intervalId: intervalId })
   }
 
