@@ -12,6 +12,7 @@ class Game extends React.Component {
     this.addMessage = this.addMessage.bind(this)
 	  this.changeRoom = this.changeRoom.bind(this)
     this.getItem = this.getItem.bind(this)
+    this.dropItem = this.dropItem.bind(this)
   }
 
   addMessage(newMessage) {
@@ -45,6 +46,27 @@ class Game extends React.Component {
     this.setState({ [roomId]: roomState })
   }
 
+  dropItem(item) {
+    this.removeItemFromInventory(item)
+    let currentRoom = this.state.player.currentRoom
+    this.addItemToRoom(item, currentRoom)
+  }
+
+  removeItemFromInventory(removedItem) {
+    const inventory = this.state.player.inventory
+    let filteredInventory = inventory.filter(item => {
+      return item.name !== removedItem.name
+    })
+    const playerState = Object.assign({}, this.state.player, { inventory: filteredInventory })
+    this.setState({ player: playerState })
+  }
+
+  addItemToRoom(item, roomId) {
+    let items = this.state[roomId].items.concat(item)
+    const roomState = Object.assign({}, this.state[roomId], { items: items })
+    this.setState({ [roomId]: roomState })
+  }
+
   gameInit() {
     let currentRoom = this.state[this.state.player.currentRoom]
 	  this.addMessage(currentRoom.desc)
@@ -66,12 +88,12 @@ class Game extends React.Component {
               <MessageLog messages={this.state.messages} />
             </div>
             <div id='bottom-section'>
-              <RoomItems items={currentRoom.items} getItem={this.getItem}/>
+              <RoomItems items={currentRoom.items} getItem={this.getItem} />
               <Exits exits={currentRoom.exits} changeRoom={this.changeRoom} />
             </div>
           </div>
           <div id='right-section'>
-            <InventoryPane items={this.state.player.inventory} />
+            <InventoryPane items={this.state.player.inventory} dropItem={this.dropItem} />
           </div>
         </div>
       </div>
