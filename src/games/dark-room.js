@@ -29,7 +29,7 @@ export const gameState = {
     name: "Dragon King's Treasure Room",
     desc: `You have done well to defeat the Dragon King. Enormous piles of gold
       lay before you. You'll be able to retire early and annoy your family as
-      you try to reconnect with them in your middle age.`
+      you try to reconnect with them in your middle age.`,
     exits: {},
     items: []
   }
