@@ -6,8 +6,7 @@ import Exits from './Exits'
 class Game extends React.Component {
   constructor(props) {
     super(props)
-    this.state = gameState
-    this.state.messages = ["A dragon appeareth!!!", "You ~quiver~"]
+    this.state = Object.assign({}, gameState, { messages: [] })
     this.addMessage = this.addMessage.bind(this)
   }
 
@@ -15,9 +14,17 @@ class Game extends React.Component {
     this.setState({ messages: this.state.messages.concat(newMessage) })
   }
 
+  changeRoom(roomId) {
+    const playerState = Object.assign({}, this.state.player, { currentRoom: roomId })
+    this.setState({ player: playerState })
+  }
+
   render() {
+    let currentRoom = this.state[this.state.player.currentRoom]
+
     return (
       <div id="game">
+        <h1>{currentRoom.name}</h1>
         <MessageLog messages={this.state.messages} />
         <Exits exits={{ 'door': 1 }} />
       </div>
