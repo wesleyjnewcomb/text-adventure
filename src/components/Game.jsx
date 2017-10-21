@@ -1,5 +1,5 @@
 import React from 'react'
-import { gameState } from '../games/dark-room'
+import { gameState, gameActions } from '../games/dark-room'
 import MessageLog from './MessageLog'
 import Exits from './Exits'
 import InventoryPane from './InventoryPane'
@@ -11,6 +11,7 @@ class Game extends React.Component {
     this.state = Object.assign({}, gameState, { messages: [] })
     this.addMessage = this.addMessage.bind(this)
 	  this.changeRoom = this.changeRoom.bind(this)
+    this.useItem = this.useItem.bind(this)
     this.getItem = this.getItem.bind(this)
     this.dropItem = this.dropItem.bind(this)
   }
@@ -23,6 +24,13 @@ class Game extends React.Component {
 	  this.addMessage(this.state[roomId].desc)
     const playerState = Object.assign({}, this.state.player, { currentRoom: roomId })
     this.setState({ player: playerState })
+  }
+
+  useItem(item) {
+    if (item.use) {
+      const newState = gameActions[item.use]
+      this.setState(newState)
+    }
   }
 
   getItem(item) {
@@ -93,7 +101,10 @@ class Game extends React.Component {
             </div>
           </div>
           <div id='right-section'>
-            <InventoryPane items={this.state.player.inventory} dropItem={this.dropItem} />
+            <InventoryPane items={this.state.player.inventory}
+              useItem={this.useItem}
+              dropItem={this.dropItem}
+            />
           </div>
         </div>
       </div>
