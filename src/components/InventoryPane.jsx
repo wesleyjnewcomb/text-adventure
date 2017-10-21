@@ -1,15 +1,23 @@
 import React from 'react'
 
 const InventoryPane = props => {
-  const { items, dropItem } = props
+  const { items, useItem, dropItem } = props
   let itemElements = items.map((item) => {
-    let handleClick = () => {
+    let useLink
+    if (item.use) {
+      let handleUseClick = () => {
+        useItem(item)
+      }
+      useLink = (<a onClick={handleUseClick}>use</a>)
+    }
+    let handleDropClick = () => {
       dropItem(item)
     }
     return (
       <li key={item.name}>
         {item.name}
-        <a onClick={handleClick}>drop</a>
+        {useLink}
+        <a onClick={handleDropClick}>drop</a>
       </li>
     )
   })
