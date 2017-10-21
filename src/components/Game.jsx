@@ -8,7 +8,13 @@ class Game extends React.Component {
     super(props)
     this.state = gameState
     this.state.messages = ["A dragon appeareth!!!", "You ~quiver~"]
+    this.addMessage = this.addMessage.bind(this)
   }
+
+  addMessage(newMessage) {
+    this.setState({ messages: this.state.messages.concat(newMessage) })
+  }
+
   render() {
     return (
       <div id="game">
