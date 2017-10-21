@@ -21,7 +21,8 @@ a:hover {
   flex: 1;
 }
 #message-log {
-
+  overflow-y: scroll;
+  height: 300px;
 }
 #right-section {
   flex: 1;
@@ -33,4 +34,5 @@ a:hover {
 #verbs li, #exits li {
   list-style: none;
   display: inline;
+  margin-right: 1em;
 }
