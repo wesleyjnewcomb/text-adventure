@@ -17,21 +17,21 @@ a:hover {
 .flex-container {
   display: flex;
 }
-#left-section {
-  flex: 1;
-}
 #message-log {
   overflow-y: scroll;
   height: 300px;
 }
+#left-section {
+  flex: 3;
+}
 #right-section {
   flex: 1;
-  min-width: 32rem;
+  width: 16rem;
 }
 #inventory li {
   list-style: square;
 }
-#verbs li, #exits li {
+#verbs li, #exits li, #room-items li {
   list-style: none;
   display: inline;
   margin-right: 1em;
